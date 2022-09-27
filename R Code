@@ -58,7 +58,7 @@ aggregate(all_trips_v2$trip_duration ~ all_trips_v2$member_casual, FUN = min)
 # Ordered by day of the week for Avg ride time by casual vs member
 all_trips$day_of_week <- ordered(all_trips$day_of_week, levels=c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"))
 
-# See the average ride time by each day for members vs casual users
+# average ride time by each day for members vs casual users
 aggregate(all_trips$trip_duration ~ all_trips$member_casual + all_trips$day_of_week, FUN = mean)
 
 # analyze ridership data by type and weekday
@@ -68,7 +68,7 @@ all_trips %>%
             ,average_duration = mean(trip_duration)) %>% 		# calculates the average duration
   arrange(member_casual, day_of_week)								# sorts
 
-# Let's visuaize the number of rides by rider type
+# visual of the number of rides by rider type
 all_trips %>% 
   group_by(member_casual, day_of_week) %>% 
   summarise(number_of_rides = n()
@@ -77,7 +77,7 @@ all_trips %>%
   ggplot(aes(x = day_of_week, y = number_of_rides, fill = member_casual)) +
   geom_col(position = "dodge")
 
-# Let's create a visualization for average duration
+# visualization for average duration
 all_trips %>% 
   group_by(member_casual, day_of_week) %>% 
   summarise(number_of_rides = n()
